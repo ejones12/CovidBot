@@ -1,0 +1,22 @@
+{
+  "name": "covidbot",
+  "version": "1.0.0",
+  "description": "Our CS5704 Project to make a Discord Bot to communicate information about the Covid-19 pandemic in a uniform manner to SE teams.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esdirkse/TroubleshooterBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esdirkse/TroubleshooterBot/issues"
+  },
+  "homepage": "https://github.com/esdirkse/TroubleshooterBot#readme",
+  "dependencies": {
+    "discord.js": "^13.6.0"
+  }
+}
