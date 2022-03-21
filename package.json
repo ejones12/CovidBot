@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/esdirkse/TroubleshooterBot#readme",
   "dependencies": {
-    "discord.js": "^13.6.0"
+    "discord.js": "^13.6.0",
+    "node.js": "^0.0.1-security"
   }
 }

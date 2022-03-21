@@ -5,6 +5,8 @@ const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
 
 client.once('ready', () => {
     console.log('CovidBot is ready!')
+
+    client.user.setActivity("Youtube", {type: "WATCHING"})
 })
 
 
