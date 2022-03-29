@@ -38,6 +38,8 @@ client.on('messageCreate', message => {
         client.commands.get('ping').execute(message, args);
     } else if (command === 'alerts') {
         client.commands.get('alerts').execute(message, args, subscribedUsers);
+    } else if (command === 'unsubscribe') {
+        client.commands.get('unsubscribe').execute(message, args, subscribedUsers);
     }
 });
 
