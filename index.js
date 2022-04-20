@@ -44,4 +44,4 @@ client.on('messageCreate', message => {
 });
 
 // need to keep this token hidden
-client.login('OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA');
+client.login(process.env.LOGIN_TOKEN); //OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
