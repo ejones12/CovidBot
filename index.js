@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { setServers } = require('dns');
 const fs = require('fs');
+const cron = require('cron');
 
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
 const prefix = '!'
@@ -42,6 +43,8 @@ client.on('messageCreate', message => {
         client.commands.get('unsubscribe').execute(message, args, subscribedUsers);
     } else if (command === 'help') {
         client.commands.get('help').execute(message, args);
+    } else if (command === 'information') {
+        client.commands.get('information').execute(message, args, subscribedUsers);
     }
 });
 
