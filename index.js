@@ -43,7 +43,7 @@ client.on('messageCreate', message => {
     }
 });
 
-let scheduledMessage = new cron.CronJob('00 00 08 * * *', () => {
+let scheduledMessage = new cron.CronJob('00 59 14 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
        const guild = client.guilds.cache.get('943632194474242109');
