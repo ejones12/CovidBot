@@ -3,7 +3,7 @@ const { setServers } = require('dns');
 const fs = require('fs');
 
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
-const prefix = '$'
+const prefix = '!'
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -40,6 +40,8 @@ client.on('messageCreate', message => {
         client.commands.get('alerts').execute(message, args, subscribedUsers);
     } else if (command === 'unsubscribe') {
         client.commands.get('unsubscribe').execute(message, args, subscribedUsers);
+    } else if (command === 'help') {
+        client.commands.get('help').execute(message, args);
     }
 });
 

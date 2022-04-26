@@ -15,12 +15,14 @@ module.exports = {
         }
 
         for (arg of args) {
-            if (arg === 'all') {
+            if (arg === '-all') {
                 message.channel.send("You have subscribed to all alerts.")
                 subscriptions['travel'].add(message.author);
                 subscriptions['vaccines'].add(message.author);
                 subscriptions['masks'].add(message.author);
                 break;
+            } else if (arg === '-categories') {
+                message.channel.send("travel\nvaccines\nmasks");
             } else if (!Object.keys(subscriptions).includes(arg)) {
                 message.channel.send(`"${arg}" is not a category.`);
             } else if (subscriptions[arg].has(message.author)) {
@@ -28,7 +30,7 @@ module.exports = {
                 message.channel.send(`You are already subscribed to ${arg} alerts.`);
             } else {
                 message.channel.send(`You have subscribed to ${arg} alerts.`);
-                // message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe ...`);
+                message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe, enter the $unsubscribe command in the Discord channel.`);
                 subscriptions[arg].add(message.author);
             }
         }
