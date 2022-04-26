@@ -1,9 +1,10 @@
 const Discord = require('discord.js');
 const { setServers } = require('dns');
 const fs = require('fs');
+const cron = require('cron');
 
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
-const prefix = '$'
+const prefix = '!'
 client.commands = new Discord.Collection();
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
@@ -40,10 +41,14 @@ client.on('messageCreate', message => {
         client.commands.get('alerts').execute(message, args, subscribedUsers);
     } else if (command === 'unsubscribe') {
         client.commands.get('unsubscribe').execute(message, args, subscribedUsers);
+    } else if (command === 'help') {
+        client.commands.get('help').execute(message, args);
+    } else if (command === 'information') {
+        client.commands.get('information').execute(message, args, subscribedUsers);
     }
 });
 
-let scheduledMessage = new cron.CronJob('00 00 08 * * *', () => {
+let scheduledMessage = new cron.CronJob('00 10 15 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
        const guild = client.guilds.cache.get('943632194474242109');
@@ -56,4 +61,4 @@ let scheduledMessage = new cron.CronJob('00 00 08 * * *', () => {
     
 
 // need to keep this token hidden
-client.login(process.env.LOGIN_TOKEN); //OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
+client.login('OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'); //OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
