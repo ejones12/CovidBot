@@ -58,4 +58,4 @@ let scheduledMessage = new cron.CronJob('00 10 15 * * *', () => {
     
 
 // need to keep this token hidden
-client.login(process.env.LOGIN_TOKEN); //OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
+client.login('OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'); //OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
