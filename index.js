@@ -2,7 +2,6 @@ const Discord = require('discord.js');
 const { setServers } = require('dns');
 const fs = require('fs');
 const cron = require('cron');
-
 const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
 const prefix = '!'
 client.commands = new Discord.Collection();
@@ -43,8 +42,6 @@ client.on('messageCreate', message => {
         client.commands.get('unsubscribe').execute(message, args, subscribedUsers);
     } else if (command === 'help') {
         client.commands.get('help').execute(message, args);
-    } else if (command === 'information') {
-        client.commands.get('information').execute(message, args, subscribedUsers);
     }
 });
 
@@ -61,4 +58,4 @@ let scheduledMessage = new cron.CronJob('00 10 15 * * *', () => {
     
 
 // need to keep this token hidden
-client.login('OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'); //OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
+client.login(process.env.LOGIN_TOKEN); //process.env.LOGIN_TOKEN//OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
