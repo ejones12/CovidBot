@@ -33,7 +33,7 @@ module.exports = {
             } else {
                 message.channel.send(`You have subscribed to ${arg} alerts.`);
                 message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe, enter the $unsubscribe command in the Discord channel.`);
-                const curr;
+                var curr;
                 if(args.length > 2){
                     curr = new Client(message.author,arg, args[arg])
                    // message.channel.send('You will be notified at ' + )
