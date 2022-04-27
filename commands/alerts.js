@@ -1,7 +1,9 @@
+const Client  = require('../Client.js');
+
 module.exports = {
     name: 'alerts',
     description: "Allows the user to subsribe to alerts.",
-    execute(message, args, subscriptions) {
+    execute(message, args, subscriptions,discordClient) {
         // Should the Bot send the alerts to a specific Discord channel?
         // It seems like we wouldn't want every user's alerts to be sent to one
         // channel because users would have to search to find the alerts
@@ -31,7 +33,19 @@ module.exports = {
             } else {
                 message.channel.send(`You have subscribed to ${arg} alerts.`);
                 message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe, enter the $unsubscribe command in the Discord channel.`);
-                subscriptions[arg].add(message.author);
+                const curr;
+                if(args.length > 2){
+                    curr = new Client(message.author,arg, args[arg])
+                   // message.channel.send('You will be notified at ' + )
+                }else {
+                    
+                   curr = new Client(message.author, arg,"10:00AM");
+                   message.channel.send('You will be notified at "10:00AM each day');
+                }
+               
+                subscriptions[arg].add(curr);
+               // subscriptions[arg].add(message.author);
+                //need to set a default time for people to be notified or allow them to specify
             }
         }
     }

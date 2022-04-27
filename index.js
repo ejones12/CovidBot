@@ -38,7 +38,7 @@ client.on('messageCreate', message => {
     if(command === 'ping') {
         client.commands.get('ping').execute(message, args);
     } else if (command === 'alerts') {
-        client.commands.get('alerts').execute(message, args, subscribedUsers);
+        client.commands.get('alerts').execute(message, args, subscribedUsers, client);
     } else if (command === 'unsubscribe') {
         client.commands.get('unsubscribe').execute(message, args, subscribedUsers);
     } else if (command === 'help') {
