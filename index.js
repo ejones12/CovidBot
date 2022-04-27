@@ -45,12 +45,12 @@ client.on('messageCreate', message => {
     }
 });
 
-let scheduledMessage = new cron.CronJob('00 49 15 * * *', () => {
+let scheduledMessage = new cron.CronJob('00 18 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
        const guild = client.guilds.cache.get('943632194474242109');
        const channel = guild.channels.cache.get('947999201793568798');
-       channel.send('Automated update every day at 1:05pm');
+       channel.send('Automated update every day at 6:00pm');
       });
           
       // When you want to start it, use:
