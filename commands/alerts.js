@@ -10,8 +10,7 @@ module.exports = {
         // they're interested in (defeats the purpose of personalized alerts).
         // It may be better to send alerts as direct messages to the users.
         console.log(message.author);
-        console.log(subscriptions);
-    
+        // console.log(subscriptions);
         
         if (args.length === 0) {
             message.channel.send('Please include a category to subscribe to: travel, vaccines, masks');
