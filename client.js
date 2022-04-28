@@ -3,14 +3,13 @@ class Client {
     infoMap;
     discordInfo;
 
-    constructor(discordObj, category, alertTimes) {
-      this.discordInfo = discordObj;
-      this.infoMap = new Map();
-      if(category != null && alertTimes != null ){
-        this.infoMap.set(category, alertTimes);
-      }
-      
+   
+     
+    constructor(discordObj){
+        this.discordInfo = discordObj;
+        this.infoMap = new Map();
     }
+
     getInfoMap(){
         return this.infoMap;
     }

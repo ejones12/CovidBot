@@ -14,11 +14,13 @@ for (const file of commandFiles) {
 
 // Bot would probably need to keep a list of subscribed users for each category.
 // Using sets to ensure we don't have duplicates.
-const subscribedUsers = { //restructure to a single map
+const subscribedUsers = new Map(); /* { //restructure to a single map
     'travel': new Set(),
     'vaccines': new Set(),
     'masks': new Set()
-};
+}; */
+
+const categories = ['travel', 'vaccines', 'masks'] ;//
 
 client.once('ready', () => {
     console.log('CovidBot is ready!')
@@ -38,9 +40,9 @@ client.on('messageCreate', message => {
     if(command === 'ping') {
         client.commands.get('ping').execute(message, args);
     } else if (command === 'alerts') {
-        client.commands.get('alerts').execute(message, args, subscribedUsers, client);
+        client.commands.get('alerts').execute(message, args, subscribedUsers, categories, client);
     } else if (command === 'unsubscribe') {
-        client.commands.get('unsubscribe').execute(message, args, subscribedUsers);
+        client.commands.get('unsubscribe').execute(message, args, subscribedUsers,categories);
     } else if (command === 'help') {
         client.commands.get('help').execute(message, args);
     }else if(command === 'information') {

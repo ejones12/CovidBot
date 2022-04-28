@@ -1,7 +1,7 @@
 module.exports = {
     name: 'unsubscribe',
     description: "Allows the user to unsubscribe from alerts.",
-    execute(message, args, subscriptions) {
+    execute(message, args, subscriptions,categories) {
         console.log(message.author);
 
         if (args.length === 0) {
@@ -11,21 +11,32 @@ module.exports = {
 
         for (arg of args) {
             if (arg === 'all') {
-                message.channel.send("You have unsubscribed from all alerts.")
-                subscriptions['travel'].delete(message.author);
-                subscriptions['vaccines'].delete(message.author);
-                subscriptions['masks'].delete(message.author);
+                var currClient;
+                if(subscriptions.has(message.author.id)){
+                    currClient = subscriptions.get(message.author.id);
+                    for(let key of categories){
+                        if (currClient.getInfoMap().has(key)) {
+                            currClient.getInfoMap().delete(key);
+                        }
+                    }
+                }
+                subscriptions.delete(message.author.id);
+                message.channel.send("You have unsubscribed from all alerts.");
                 break;
             } else if (arg === '-categories') {
-                message.channel.send("travel\nvaccines\nmasks");
-            } else if (!Object.keys(subscriptions).includes(arg)) {
+                message.channel.send("Categories are: " + categories.toString());
+            } else if (!categories.includes(arg)) {
                 message.channel.send(`"${arg}" is not a category.`);
-            } else if (!subscriptions[arg].has(message.author)) {
-                message.channel.send(`You are not currently subscribed to ${arg} alerts.`);
+            } else if (!subscriptions.has(message.author.id)) {
+                message.channel.send(`You are not currently subscribed to alerts.`);
             } else {
-                message.channel.send(`You have unsubscribed from ${arg} alerts.`);
-                // remove user from set
-                subscriptions[arg].delete(message.author);
+                if(!subscriptions.get(message.author.id).getInfoMap().has(arg)){
+                    message.channel.send(`You are currently not subscribed to ${arg} alerts.`)
+                }else {
+                    message.channel.send(`You have unsubscribed from ${arg} alerts.`);
+                    // remove user from set
+                    subscriptions.delete(message.author.id);
+                }
             }
         }
     }
