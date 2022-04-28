@@ -28,7 +28,9 @@ def get_related(keyword):
         related = "(mask OR masks OR #mask OR #masks)"
 
     elif keyword == "travel":
-        related = "(travel OR traveling OR travels OR #travel OR #traveling)"
+        # broadened travel search query terms to include implicit information on where people might travel. 
+        related = """(travel OR traveling OR travels OR #travel OR #traveling
+         OR country OR county OR location)""" 
 
     elif keyword == "vaccines":
         related = "(vaccine OR vaccines OR vaccinated OR vax OR vaccination OR vaccinations #vaccine OR #vaccines OR #vax OR #vaccinated OR #vaccination OR #vaccinations)"
