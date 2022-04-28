@@ -15,7 +15,7 @@ module.exports = {
             message.channel.send('Please include a category to subscribe to: travel, vaccines, masks');
             return;
         }
-
+        //need to add check for current user if they are already subscribed
         for (arg of args) {
             if (arg === '-all') {
                 message.channel.send("You have subscribed to all alerts.")
@@ -27,7 +27,7 @@ module.exports = {
                 message.channel.send("travel\nvaccines\nmasks");
             } else if (!Object.keys(subscriptions).includes(arg)) {
                 message.channel.send(`"${arg}" is not a category.`);
-            } else if (subscriptions[arg].has(message.author)) {
+            } else if (subscriptions[arg].has(message.author)) { 
                 // need to check if the user is already subscribed
                 message.channel.send(`You are already subscribed to ${arg} alerts.`);
             } else {
@@ -35,12 +35,12 @@ module.exports = {
                 message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe, enter the $unsubscribe command in the Discord channel.`);
                 var curr;
                 if(args.length > 2){
-                    curr = new Client(message.author,arg, args[arg])
+                    curr = new Client(message.author,arg, args[arg]);
                    // message.channel.send('You will be notified at ' + )
                 }else {
                     
                    curr = new Client(message.author, arg,"10:00AM");
-                   message.channel.send('You will be notified at "10:00AM each day');
+                   message.channel.send('You will be notified at 10:00AM each day');
                 }
                
                 subscriptions[arg].add(curr);

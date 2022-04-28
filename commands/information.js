@@ -7,6 +7,7 @@ module.exports = {
         console.log('Started child process for twitter scraping...')
         
         scrapingProg.stdout.on('data', function(data) {
+            console.log('hey im here');
             console.log(data.toString());
         });
     }

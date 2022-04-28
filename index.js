@@ -14,7 +14,7 @@ for (const file of commandFiles) {
 
 // Bot would probably need to keep a list of subscribed users for each category.
 // Using sets to ensure we don't have duplicates.
-const subscribedUsers = {
+const subscribedUsers = { //restructure to a single map
     'travel': new Set(),
     'vaccines': new Set(),
     'masks': new Set()
@@ -59,4 +59,4 @@ let scheduledMessage = new cron.CronJob('06 18 * * *', () => {
     
 
 // need to keep this token hidden
-client.login(process.env.LOGIN_TOKEN); //process.env.LOGIN_TOKEN//OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
+client.login('OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'); //process.env.LOGIN_TOKEN//OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
