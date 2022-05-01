@@ -45,7 +45,7 @@ client.on('messageCreate', message => {
         client.commands.get('unsubscribe').execute(message, args, subscribedUsers,categories);
     } else if (command === 'help') {
         client.commands.get('help').execute(message, args);
-    }else if(command === 'information') {
+    } else if(command === 'information') {
         client.commands.get('information').execute(message,args,subscribedUsers);
     }
 });
