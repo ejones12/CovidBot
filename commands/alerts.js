@@ -1,4 +1,4 @@
-const Client  = require('./Client.js');
+const Client  = require('./client.js');
 
 module.exports = {
     name: 'alerts',
