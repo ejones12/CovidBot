@@ -7,11 +7,11 @@ module.exports = {
         console.log('Started child process for twitter scraping...')
         
         scrapingProg.stdout.on('data', function(data) {
+            console.log('anything');
             console.log(data.toString());
             //read from json?
             //need check for args to see if invalid
             //pass in as args to twitter script
-
         });
     }
 }
