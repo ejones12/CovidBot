@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import { execute } from "../commands/alerts.js"
+const execute = require("./commands/alerts");
 const prefix = "!"
 
 describe("Message Handler", () => {
