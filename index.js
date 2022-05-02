@@ -40,9 +40,9 @@ client.on('messageCreate', message => {
     if(command === 'ping') {
         client.commands.get('ping').execute(message, args);
     } else if (command === 'alerts') {
-        client.commands.get('alerts').execute(message, args, subscribedUsers, categories, client);
+        client.commands.get('alerts').execute(message, args, subscribedUsers, categories);
     } else if (command === 'unsubscribe') {
-        client.commands.get('unsubscribe').execute(message, args, subscribedUsers,categories);
+        client.commands.get('unsubscribe').execute(message, args, subscribedUsers, categories);
     } else if (command === 'help') {
         client.commands.get('help').execute(message, args);
     } else if(command === 'information') {
@@ -50,16 +50,26 @@ client.on('messageCreate', message => {
     }
 });
 
-let scheduledMessage = new cron.CronJob('06 18 * * *', () => {
+let scheduledMessage = new cron.CronJob('40 13 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
-       const guild = client.guilds.cache.get('943632194474242109');
-       const channel = guild.channels.cache.get('947999201793568798');
-       channel.send('Automated update every day at 6:00pm');
-      });
+    const guild = client.guilds.cache.get('943632194474242109');
+    const channel = guild.channels.cache.get('947999201793568798');
+    channel.send('Automated update every day at 6:00pm');
+    for (let [key, client] of subscribedUsers) {
+        console.log(key + " = " + client);
+        client.sendDirectMessage('Here are your subscriptions: ');
+        client.printSubscriptions();
+        for (category in categories) {
+            if (client.isSubscribedTo(category)) {
+                client.sendDirectMessage(`You are subscribed to ${category}. This is your regular alert.`)
+            }
+        }
+    }
+});
           
-      // When you want to start it, use:
-      scheduledMessage.start()
+// When you want to start it, use:
+scheduledMessage.start()
     
 
 // need to keep this token hidden

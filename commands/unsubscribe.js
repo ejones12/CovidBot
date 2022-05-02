@@ -10,7 +10,7 @@ module.exports = {
         }
 
         for (arg of args) {
-            if (arg === 'all') {
+            if (arg === '-all') {
                 var currClient;
                 if(subscriptions.has(message.author.id)){
                     currClient = subscriptions.get(message.author.id);

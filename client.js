@@ -1,33 +1,47 @@
 class Client {
     
-    infoMap;
-    discordInfo;
-
-   
+    subscriptions;
+    discordUserObj;
      
     constructor(discordObj){
-        this.discordInfo = discordObj;
-        this.infoMap = new Map();
+        this.discordUserObj = discordObj;
+        this.subscriptions = new Map();
     }
 
-    getInfoMap(){
-        return this.infoMap;
+    sendDirectMessage(msg) {
+        this.discordUserObj.send(msg);
+    };
+
+    isSubscribedTo(category) {
+        return this.subscriptions.has(category);
+    }
+
+    getSubscriptionTime(category) {
+        return this.subscriptions.get(category);
+    }
+
+    printSubscriptions() {
+        for (let [category, time] of this.subscriptions) {
+            console.log(`${category}: ${time}`);
+        }
     }
 
     //not sure if needed?
-    getAlertTimes(){
+    getAlertTimes() {
         return this.alertTimes;
     }
 
-    addCategory(category, time){
+    addSubscription(category, time) {
         //this.categories.push(category);
-        if(category != null && time != null){
-            this.infoMap.set(category,time);
+        if (category != null && time != null) {
+            this.subscriptions.set(category, time);
         }
     }
-    addAlertTime(time){
+
+    addAlertTime(time) {
         this.alertTimes.push(time);
     }
+
     removeCategory(category){
         /* var arrayLength = this.categories.length;
         for (var i = 0; i < arrayLength; i++) {
@@ -35,16 +49,17 @@ class Client {
                 delete this.categories[i];
             }
         } */
-        for(let [key,value] of this.infoMap){ //dont think i need a loop but whatevr
+        for(let [key, value] of this.subscriptions){ //dont think i need a loop but whatevr
             if(category === key){
-                this.infoMap.delete(key);
+                this.subscriptions.delete(key);
             }
         }
     }
+
     removeAlertTime(time){
-        for(let [key,value] of this.infoMap){
+        for(let [key,value] of this.subscriptions){
             if(value === time){
-                this.infoMap.delete(key);
+                this.subscriptions.delete(key);
             }
         }
         /* var arrayLength = this.alertTimes.length;

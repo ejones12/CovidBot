@@ -1,9 +1,9 @@
-const Client  = require('./client.js');
+const Client = require('../client.js');
 
 module.exports = {
     name: 'alerts',
     description: "Allows the user to subsribe to alerts.",
-    execute(message, args, subscriptions,categories,discordClient) {
+    execute(message, args, subscriptions, categories) {
         // Should the Bot send the alerts to a specific Discord channel?
         // It seems like we wouldn't want every user's alerts to be sent to one
         // channel because users would have to search to find the alerts
@@ -20,34 +20,27 @@ module.exports = {
         for (arg of args) {
             if (arg === '-all') {
                 var currClient;
-                if(subscriptions.has(message.author.id)){
-                    console.log("IM ALREADY HERE")
+                if (subscriptions.has(message.author.id)) {
+                    console.log("IM ALREADY HERE");
                     currClient = subscriptions.get(message.author.id);
-                    for(let key of categories){
-                        if(currClient.getInfoMap().has(key)){
-                            message.channel.send(`You are already subscribed to ${key} alerts.`)
-                        }else {
-                            currClient.addCategory(key,"10:00AM");
-                            message.channel.send(`You have subscribed to ${key} alerts.`);
-                            message.author.send(`You have subscribed to ${key} alerts. To unsubscribe, enter the $unsubscribe command in the Discord channel.`);
-               
-                            message.channel.send('You will be notified at 10:00AM each day.');
+                    for (let category of categories) {
+                        if (currClient.isSubscribedTo(category)) {
+                            message.channel.send(`You are already subscribed to ${category} alerts.`);
+                        } else {
+                            currClient.addSubscription(category, "10:00AM");
+                            message.channel.send(`You have subscribed to ${category} alerts. You will be notified at 10:00 AM each day.`);
+                            message.author.send(`You have subscribed to ${category} alerts. To unsubscribe, enter the !unsubscribe command in the Discord channel.`);
                         }
                     }
                 } else {
                     currClient = new Client(message.author);
-                    for (key in categories){
-                        currClient.addCategory(key,"10:00AM");
-                        message.channel.send(`You have subscribed to ${arg} alerts.`);
-                        message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe, enter the $unsubscribe command in the Discord channel.`);
-           
-                        message.channel.send('You will be notified at 10:00AM each day.');
-                   
+                    for (let category of categories) {
+                        currClient.addSubscription(category, "10:00AM");
+                        message.channel.send(`You have subscribed to ${category} alerts. You will be notified at 10:00 AM each day.`);
+                        message.author.send(`You have subscribed to ${category} alerts. To unsubscribe, enter the !unsubscribe command in the Discord channel.`);
                     }
                     subscriptions.set(message.author.id, currClient);
                 }
-            
-                message.channel.send("You have subscribed to all alerts.")
                 break;
             } else if (arg === '-categories') {
                 message.channel.send("Categories: " + categories.toString());
@@ -56,35 +49,21 @@ module.exports = {
             } else if (subscriptions.has(message.author.id)) { 
                 // need to check if the user is already subscribed
                 let currClient = subscriptions.get(message.author.id);
-                let notifTime =  currClient.getInfoMap().get(arg);
-                message.channel.send(`Sorry, you are already subscribed to ${arg} alerts. You will receive notifications at ${notifTime}`);
-            } else {
-
-                message.channel.send(`You have subscribed to ${arg} alerts.`);
-                message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe, enter the $unsubscribe command in the Discord channel.`);
-               
-                 var curr;
-                if(args.length > 2){
-                    //TODO: Need to figure out how to get time from arguments
-
-                    //curr = new Client(message.author,arg, args[arg]);
-                   // message.channel.send('You will be notified at ' + )
-                }else {
-                    
-                   curr = new Client(message.author);
-                   curr.addCategory(arg,"10:00AM");
-                   message.channel.send('You will be notified at 10:00AM each day.');
+                if (currClient.isSubscribedTo(arg)) {
+                    let notifTime = currClient.getSubscriptionTime(arg);
+                    message.channel.send(`Sorry, you are already subscribed to ${arg} alerts. You will receive notifications at ${notifTime}.`);
+                } else {
+                    currClient.addSubscription(arg, "10:00AM");
+                    message.channel.send(`You have subscribed to ${arg} alerts. You will be notified at 10:00 AM each day.`);
                 }
-                
-             
-                subscriptions.set(message.author.id, curr);
-                
-                 //need to set a default time for people to be notified or allow them to specify
+            } else {
+                // need to set a default time for people to be notified or allow them to specify
+                currClient = new Client(message.author);
+                currClient.addSubscription(arg, "10:00AM");
+                subscriptions.set(message.author.id, currClient);
+                message.channel.send(`You have subscribed to ${arg} alerts. You will be notified at 10:00 AM each day.`);
+                message.author.send(`You have subscribed to ${arg} alerts. To unsubscribe, enter the !unsubscribe command in the Discord channel.`);
             }
         }
     }
-
-
-  
-
 }
