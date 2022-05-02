@@ -1,59 +1,44 @@
 class Client {
     
-    infoMap;
-    discordInfo;
-
-   
+    subscriptions;
+    discordUserObj;
      
     constructor(discordObj){
-        this.discordInfo = discordObj;
-        this.infoMap = new Map();
+        this.discordUserObj = discordObj;
+        this.subscriptions = new Map();
     }
 
-    getInfoMap(){
-        return this.infoMap;
+    sendDirectMessage(msg) {
+        this.discordUserObj.send(msg);
     }
 
-    //not sure if needed?
-    getAlertTimes(){
-        return this.alertTimes;
+    isSubscribedTo(category) {
+        return this.subscriptions.has(category);
     }
 
-    addCategory(category, time){
-        //this.categories.push(category);
-        if(category != null && time != null){
-            this.infoMap.set(category,time);
+    getSubscriptionTime(category) {
+        return this.subscriptions.get(category);
+    }
+
+    printSubscriptions() {
+        for (let [category, time] of this.subscriptions) {
+            console.log(`${category}: ${time}`);
         }
     }
-    addAlertTime(time){
-        this.alertTimes.push(time);
-    }
-    removeCategory(category){
-        /* var arrayLength = this.categories.length;
-        for (var i = 0; i < arrayLength; i++) {
-            if(category === this.categories[i]){
-                delete this.categories[i];
-            }
-        } */
-        for(let [key,value] of this.infoMap){ //dont think i need a loop but whatevr
-            if(category === key){
-                this.infoMap.delete(key);
-            }
-        }
-    }
-    removeAlertTime(time){
-        for(let [key,value] of this.infoMap){
-            if(value === time){
-                this.infoMap.delete(key);
-            }
-        }
-        /* var arrayLength = this.alertTimes.length;
-        for (var i = 0; i < arrayLength; i++) {
-            if(time === this.alertTimes[i]){
-                delete this.alertTimes[i];
-            }
-        } */
-    }
-  }
 
-  if (typeof module === 'object') module.exports = Client;
+    addSubscription(category, time) {
+        if (category != null && time != null) {
+            this.subscriptions.set(category, time);
+        }
+    }
+
+    removeSubscription(category) {
+        this.subscriptions.delete(category);
+    }
+
+    getNumSubscriptions() {
+        return this.subscriptions.size;
+    }
+}
+
+if (typeof module === 'object') module.exports = Client;
