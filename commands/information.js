@@ -6,7 +6,11 @@ module.exports = {
     execute(message, args, subscriptions) {
         const { spawn } = require('child_process');
         const scrapingProg = spawn('python', ['./twitterScraper.py', 'general']);
-        console.log('Started child process for twitter scraping...')
+        console.log('Started child process for twitter scraping...');
+
+        scrapingProg.stderr.on('data', (data) => {
+            console.error(`stderr: ${data}`);
+        });
 
         scrapingProg.stdout.on('data', function(data) {
             console.log(data.toString());
@@ -23,11 +27,14 @@ module.exports = {
                     console.log(data.data[0].text);
                     //console.log("Customer address is:", customer.address) // => "Customer address is: Infinity Loop Drive"
                     message.channel.send(data.data[0].text);
-            } catch(err) {
+                } catch(err) {
                     console.log('Error parsing JSON string:', err)
                 }
             });
+        });
 
+        scrapingProg.on('close', (code) => {
+            console.log(`child process exited with code ${code}`);
         });
     }
 }

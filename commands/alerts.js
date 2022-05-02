@@ -18,7 +18,7 @@ module.exports = {
         }
         //need to add check for current user if they are already subscribed
         for (arg of args) {
-            if (arg === '-all') {
+            if (arg === '--all') {
                 var currClient;
                 if (subscriptions.has(message.author.id)) {
                     console.log("IM ALREADY HERE");
@@ -42,7 +42,7 @@ module.exports = {
                     subscriptions.set(message.author.id, currClient);
                 }
                 break;
-            } else if (arg === '-categories') {
+            } else if (arg === '--categories') {
                 message.channel.send("Categories: " + categories.toString());
             } else if (!categories.includes(arg)) {
                 message.channel.send(`"${arg}" is not a category.`);

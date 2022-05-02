@@ -21,9 +21,11 @@ class Client {
     }
 
     printSubscriptions() {
+        let result = ''
         for (let [category, time] of this.subscriptions) {
-            console.log(`${category}: ${time}`);
+            result += `${category}: ${time}\n`;
         }
+        return result;
     }
 
     addSubscription(category, time) {

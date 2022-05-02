@@ -12,10 +12,12 @@ module.exports = {
         }
 
         for (arg of args) {
-            if (!subscriptions.has(message.author.id)) {
+            if (arg === '--categories') {
+                message.channel.send("Categories: " + categories.toString());
+            } else if (!subscriptions.has(message.author.id)) {
                 message.channel.send(`You are not currently subscribed to alerts.`);
                 break;
-            } else if (arg === '-all') {
+            } else if (arg === '--all') {
                 var currClient;
                 currClient = subscriptions.get(message.author.id);
                 for (let category of categories){
@@ -26,8 +28,6 @@ module.exports = {
                 subscriptions.delete(message.author.id);
                 message.channel.send("You have unsubscribed from all alerts.");
                 break;
-            } else if (arg === '-categories') {
-                message.channel.send("Categories: " + categories.toString());
             } else if (!categories.includes(arg)) {
                 message.channel.send(`"${arg}" is not a category.`);
             } else {

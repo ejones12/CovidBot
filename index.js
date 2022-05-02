@@ -20,7 +20,7 @@ const subscribedUsers = new Map(); /* { //restructure to a single map
     'masks': new Set()
 }; */
 
-const categories = ['travel', 'vaccines', 'masks'] ;//
+const categories = ['travel', 'vaccines', 'masks'];//
 
 client.once('ready', () => {
     console.log('CovidBot is ready!')
@@ -46,11 +46,13 @@ client.on('messageCreate', message => {
     } else if (command === 'help') {
         client.commands.get('help').execute(message, args);
     } else if(command === 'information') {
-        client.commands.get('information').execute(message,args,subscribedUsers);
+        client.commands.get('information').execute(message, args, subscribedUsers);
+    } else {
+        message.channel.send('Invalid command. Try !help.');
     }
 });
 
-let scheduledMessage = new cron.CronJob('40 13 * * *', () => {
+let scheduledMessage = new cron.CronJob('45 13 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
     const guild = client.guilds.cache.get('943632194474242109');
@@ -59,10 +61,12 @@ let scheduledMessage = new cron.CronJob('40 13 * * *', () => {
     for (let [key, client] of subscribedUsers) {
         console.log(key + " = " + client);
         client.sendDirectMessage('Here are your subscriptions: ');
-        client.printSubscriptions();
-        for (category in categories) {
+        client.sendDirectMessage(client.printSubscriptions());
+        for (let category of categories) {
             if (client.isSubscribedTo(category)) {
                 client.sendDirectMessage(`You are subscribed to ${category}. This is your regular alert.`)
+            } else {
+                client.sendDirectMessage(`Not subscribed to ${category}`);
             }
         }
     }
