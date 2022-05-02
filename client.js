@@ -10,7 +10,7 @@ class Client {
 
     sendDirectMessage(msg) {
         this.discordUserObj.send(msg);
-    };
+    }
 
     isSubscribedTo(category) {
         return this.subscriptions.has(category);
@@ -26,49 +26,19 @@ class Client {
         }
     }
 
-    //not sure if needed?
-    getAlertTimes() {
-        return this.alertTimes;
-    }
-
     addSubscription(category, time) {
-        //this.categories.push(category);
         if (category != null && time != null) {
             this.subscriptions.set(category, time);
         }
     }
 
-    addAlertTime(time) {
-        this.alertTimes.push(time);
+    removeSubscription(category) {
+        this.subscriptions.delete(category);
     }
 
-    removeCategory(category){
-        /* var arrayLength = this.categories.length;
-        for (var i = 0; i < arrayLength; i++) {
-            if(category === this.categories[i]){
-                delete this.categories[i];
-            }
-        } */
-        for(let [key, value] of this.subscriptions){ //dont think i need a loop but whatevr
-            if(category === key){
-                this.subscriptions.delete(key);
-            }
-        }
+    getNumSubscriptions() {
+        return this.subscriptions.size;
     }
+}
 
-    removeAlertTime(time){
-        for(let [key,value] of this.subscriptions){
-            if(value === time){
-                this.subscriptions.delete(key);
-            }
-        }
-        /* var arrayLength = this.alertTimes.length;
-        for (var i = 0; i < arrayLength; i++) {
-            if(time === this.alertTimes[i]){
-                delete this.alertTimes[i];
-            }
-        } */
-    }
-  }
-
-  if (typeof module === 'object') module.exports = Client;
+if (typeof module === 'object') module.exports = Client;
