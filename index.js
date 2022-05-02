@@ -47,6 +47,8 @@ client.on('messageCreate', message => {
         client.commands.get('help').execute(message, args);
     } else if(command === 'information') {
         client.commands.get('information').execute(message, args, subscribedUsers);
+    } else {
+        message.channel.send('Invalid command. Try !help.');
     }
 });
 
