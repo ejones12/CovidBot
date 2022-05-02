@@ -3,7 +3,7 @@ const Client  = require('../client.js');
 module.exports = {
     name: 'alerts',
     description: "Allows the user to subsribe to alerts.",
-    execute(message, args, subscriptions,categories,discordClient) {
+    execute(message, args, subscriptions,categories) {
         // Should the Bot send the alerts to a specific Discord channel?
         // It seems like we wouldn't want every user's alerts to be sent to one
         // channel because users would have to search to find the alerts
