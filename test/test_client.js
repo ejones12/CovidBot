@@ -1,6 +1,14 @@
 const Client = require("../client");
 var assert = require('assert');
 
+/** 
+ * 
+ * Unit tests to demonstrate the functionality of the Client class.
+ * 
+*/
+
+
+
 describe('Client Functionality Unit Tests', function () {
     let discordObj = "discordObj";
     let client = new Client(discordObj);

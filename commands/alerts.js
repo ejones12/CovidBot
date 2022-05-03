@@ -1,24 +1,30 @@
 const Client = require('../client.js');
+/*
 
+Functionality for alerts command.
+Uses message sent by user to determine how to subscribe, unsubscribe and notify users. 
+When a new user is found, they are added to a list of existing clients
+
+*/
 module.exports = {
     name: 'alerts',
     description: "Allows the user to subsribe to alerts.",
     execute(message, args, subscriptions, categories) {
-        // Should the Bot send the alerts to a specific Discord channel?
+
         // It seems like we wouldn't want every user's alerts to be sent to one
         // channel because users would have to search to find the alerts
         // they're interested in (defeats the purpose of personalized alerts).
         // It may be better to send alerts as direct messages to the users.
         console.log(message.author);
-        // console.log(subscriptions);
         
+        //Did not provide category to subscribe to
         if (args.length === 0) {
             message.channel.send('Please include a category to subscribe to: travel, vaccines, masks');
             return;
         }
-        //need to add check for current user if they are already subscribed
+       
         for (arg of args) {
-            if (arg === '--all') {
+            if (arg === '--all') { //if user wants to subscribe to all categories
                 var currClient;
                 if (subscriptions.has(message.author.id)) {
                     console.log("IM ALREADY HERE");
@@ -42,12 +48,12 @@ module.exports = {
                     subscriptions.set(message.author.id, currClient);
                 }
                 break;
-            } else if (arg === '--categories') {
+            } else if (arg === '--categories') { //lists all existing categories
                 message.channel.send("Categories: " + categories.toString());
-            } else if (!categories.includes(arg)) {
+                message.channel.send("Please type '!alerts [category]' to subscribe to alerts. Ex: '!alerts masks'")
+            } else if (!categories.includes(arg)) { //determins if arguement is included in the category
                 message.channel.send(`"${arg}" is not a category.`);
-            } else if (subscriptions.has(message.author.id)) { 
-                // need to check if the user is already subscribed
+            } else if (subscriptions.has(message.author.id)) { // need to check if the user is already subscribed
                 let currClient = subscriptions.get(message.author.id);
                 if (currClient.isSubscribedTo(arg)) {
                     let notifTime = currClient.getSubscriptionTime(arg);
@@ -56,8 +62,7 @@ module.exports = {
                     currClient.addSubscription(arg, "10:00AM");
                     message.channel.send(`You have subscribed to ${arg} alerts. You will be notified at 10:00 AM each day.`);
                 }
-            } else {
-                // need to set a default time for people to be notified or allow them to specify
+            } else { //creates new client object and adds new subscription
                 currClient = new Client(message.author);
                 currClient.addSubscription(arg, "10:00AM");
                 subscriptions.set(message.author.id, currClient);
