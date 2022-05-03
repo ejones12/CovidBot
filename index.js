@@ -58,10 +58,30 @@ let scheduledMessage = new cron.CronJob('45 13 * * *', () => {
     const guild = client.guilds.cache.get('943632194474242109');
     const channel = guild.channels.cache.get('947999201793568798');
     channel.send('Automated update every day at 6:00pm');
+
+    const { spawn } = require('child_process');
+    const generalScrape = spawn('python', ['./twitterScraper.py', 'general']);
+    const travelScrape = spawn('python', ['./twitterScraper.py', 'travel']);
+    const masksScrape = spawn('python', ['./twitterScraper.py', 'masks']);
+    const vaccinesScrape = spawn('python', ['./twitterScraper.py', 'vaccines']);
+
+    generalScrape.stdout.on('data', function(data) {
+        fs.readFile('./general_data.json', 'utf8', (err, jsonString) => {
+            if (err) {
+                console.log("Error reading file from disk:", err);
+                return;
+            }
+            try {
+                const data = JSON.parse(jsonString);
+            } catch(err) {
+                console.log('Error parsing JSON string:', err);
+            }
+        });
+    });
+
     for (let [key, client] of subscribedUsers) {
         console.log(key + " = " + client);
-        client.sendDirectMessage('Here are your subscriptions: ');
-        client.sendDirectMessage(client.printSubscriptions());
+        client.sendDirectMessage(`Here are your subscriptions:\n ${client.printSubscriptions()}`);
         for (let category of categories) {
             if (client.isSubscribedTo(category)) {
                 client.sendDirectMessage(`You are subscribed to ${category}. This is your regular alert.`)
