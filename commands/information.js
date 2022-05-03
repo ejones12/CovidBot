@@ -24,7 +24,7 @@ module.exports = {
             //read from json?
             //need check for args to see if invalid
             //pass in as args to twitter script
-            fs.readFile('./general_data.json', 'utf8', (err, jsonString) => {
+            fs.readFile('./json_data/general_data.json', 'utf8', (err, jsonString) => {
                 if (err) {
                     console.log("Error reading file from disk:", err)
                     return

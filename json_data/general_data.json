@@ -1,6 +1,14 @@
 {
     "data": [
         {
+            "id": "1521580387033665536",
+            "text": "Your body\u2019s ability to fight off #COVID19 can decrease over time. Getting a booster can help your body build back the protection that has been lost. Is it time for a booster?\nLearn more: https://t.co/77CTFuJFcO. https://t.co/bPU9zkGURW"
+        },
+        {
+            "id": "1521554434836377600",
+            "text": "CDC has updated #COVID19 guidance for correctional and detention facilities. Updates include flexible prevention plans and strategies facilities can use for every COVID-19 Community Level. Learn more: https://t.co/lcqXKhsUhb."
+        },
+        {
             "id": "1521233097907396610",
             "text": "As of May 2, 257.7 million people have received at least one dose of a #COVID19 vaccine. Of those, 219.8 million are fully vaccinated. More than 100.7 million people have received a COVID-19 booster dose.\n\nFind a COVID-19 vaccine or booster near you: https://t.co/xbvNiaVJKV. https://t.co/tOShsscVjD"
         },
@@ -31,20 +39,12 @@
         {
             "id": "1519775984819621889",
             "text": "CDC study shows higher county-level #COVID19 vaccine coverage was associated with fewer cases and deaths. \n\nStay up to date on your COVID-19 vaccines. Read the study: https://t.co/aYgzkoszpA. https://t.co/3RbuZbPsKa"
-        },
-        {
-            "id": "1519716829517787140",
-            "text": "New data indicate that completing a 2-dose primary series of an mRNA #COVID19 vaccine (Pfizer-BioNTech or Moderna) during pregnancy can protect babies younger than 6 months from hospitalization due to COVID-19. Learn more: https://t.co/pBVlI6STf8. https://t.co/YCGcoY9aqB"
-        },
-        {
-            "id": "1519421150262140929",
-            "text": "As of April 25, 2022, national forecasts predict 600\u20137,000 new #COVID19 hospitalizations will likely be reported on May 20. More: https://t.co/Xys80ZGlxV. https://t.co/sLq8aMi3OS"
         }
     ],
     "meta": {
-        "newest_id": "1521233097907396610",
-        "next_token": "b26v89c19zqg8o3fpytot5armbhnduzl3q8gywk8rp3lp",
-        "oldest_id": "1519421150262140929",
+        "newest_id": "1521580387033665536",
+        "next_token": "b26v89c19zqg8o3fpytotbqg6kg3bmr3gds2v6cna2qnx",
+        "oldest_id": "1519775984819621889",
         "result_count": 10
     }
 }
