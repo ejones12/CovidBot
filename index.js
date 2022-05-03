@@ -24,11 +24,10 @@ const subscribedUsers = new Map(); /* { //restructure to a single map
     'masks': new Set()
 }; */
 
-const categories = ['travel', 'vaccines', 'masks'];//
+const categories = ['general', 'travel', 'vaccines', 'masks'];//
 
 client.once('ready', () => {
-    console.log('CovidBot is ready!')
-    console.log()
+    console.log('CovidBot is ready!\n');
 });
 
 // code from CodeLyon
@@ -56,7 +55,7 @@ client.on('messageCreate', message => {
     }
 });
 
-let scheduledMessage = new cron.CronJob('20 14 * * *', () => {
+let scheduledMessage = new cron.CronJob('32 14 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
     const guild = client.guilds.cache.get('943632194474242109');
@@ -68,6 +67,24 @@ let scheduledMessage = new cron.CronJob('20 14 * * *', () => {
 
     scrapingProg.on('exit', function(code) {
         console.log(`child process exited with code ${code}`);
+        fs.readFile('./json_data/general_data.json', 'utf8', (err, jsonString) => {
+            if (err) {
+                console.log("Error reading file from disk:", err);
+                return;
+            }
+            try {
+                const data = JSON.parse(jsonString);
+                if (data.meta.result_count > 0) {
+                    for (let [key, client] of subscribedUsers) {
+                        if (client.isSubscribedTo('general')) {
+                            client.sendDirectMessage(data.data[0].text);
+                        }
+                    }
+                }
+            } catch(err) {
+                console.log('Error parsing JSON string:', err);
+            }
+        });
         fs.readFile('./json_data/masks_data.json', 'utf8', (err, jsonString) => {
             if (err) {
                 console.log("Error reading file from disk:", err);
