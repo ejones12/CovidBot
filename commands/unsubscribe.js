@@ -1,5 +1,12 @@
 const Client = require('../client.js');
 
+/**
+ * 
+ * Functionality for the unsubscribe function. Allows user to unsubscribe from notifications for a specific category 
+ * or all categories.
+ * 
+ */
+
 module.exports = {
     name: 'unsubscribe',
     description: "Allows the user to unsubscribe from alerts.",
@@ -14,6 +21,7 @@ module.exports = {
         for (arg of args) {
             if (arg === '--categories') {
                 message.channel.send("Categories: " + categories.toString());
+                message.channel.send("Please type '!unsubscribe [category]' to unsubscribe from alerts. Ex: '!unsubscribe masks'");
             } else if (!subscriptions.has(message.author.id)) {
                 message.channel.send(`You are not currently subscribed to alerts.`);
                 break;

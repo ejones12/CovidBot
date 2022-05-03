@@ -71,27 +71,33 @@ def search_twitter(keyword, related):
     json_response = connect_to_endpoint(related)
 
     if keyword == "masks":
-        with open('masks_data.json', 'w') as outfile:
+        with open('./json_data/masks_data.json', 'w') as outfile:
             outfile.write(json.dumps(json_response, indent=4, sort_keys=True))
 
     elif keyword == "travel":
-        with open('travel_data.json', 'w') as outfile:
+        with open('./json_data/travel_data.json', 'w') as outfile:
             outfile.write(json.dumps(json_response, indent=4, sort_keys=True))
 
     elif keyword == "vaccines":
-        with open('vaccines_data.json', 'w') as outfile:
+        with open('./json_data/vaccines_data.json', 'w') as outfile:
             outfile.write(json.dumps(json_response, indent=4, sort_keys=True))
 
     else: #general
-        with open('general_data.json', 'w') as outfile:
+        with open('./json_data/general_data.json', 'w') as outfile:
             outfile.write(json.dumps(json_response, indent=4, sort_keys=True))
 
 """
     Main method that runs the twitter scraper script
 """
 def main():
-    keyword = sys.argv[1]
-    search_twitter(keyword, get_related(keyword))
+    if len(sys.argv) < 2:
+        search_twitter("travel", get_related("travel"))
+        search_twitter("masks", get_related("masks"))
+        search_twitter("vaccines", get_related("vaccines"))
+        search_twitter("general", get_related("general"))
+    else:
+        keyword = sys.argv[1]
+        search_twitter(keyword, get_related(keyword))
 
 if __name__ == "__main__":
     main()
