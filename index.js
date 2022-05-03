@@ -77,7 +77,7 @@ let scheduledMessage = new cron.CronJob('32 14 * * *', () => {
                 if (data.meta.result_count > 0) {
                     for (let [key, client] of subscribedUsers) {
                         if (client.isSubscribedTo('general')) {
-                            client.sendDirectMessage(data.data[0].text);
+                            client.sendDirectMessage(`General: ${data.data[0].text}`);
                         }
                     }
                 }
@@ -95,7 +95,7 @@ let scheduledMessage = new cron.CronJob('32 14 * * *', () => {
                 if (data.meta.result_count > 0) {
                     for (let [key, client] of subscribedUsers) {
                         if (client.isSubscribedTo('masks')) {
-                            client.sendDirectMessage(data.data[0].text);
+                            client.sendDirectMessage(`Masks: ${data.data[0].text}`);
                         }
                     }
                 }
@@ -113,7 +113,7 @@ let scheduledMessage = new cron.CronJob('32 14 * * *', () => {
                 if (data.meta.result_count > 0) {
                     for (let [key, client] of subscribedUsers) {
                         if (client.isSubscribedTo('travel')) {
-                            client.sendDirectMessage(data.data[0].text);
+                            client.sendDirectMessage(`Travel: ${data.data[0].text}`);
                         }
                     }
                 }
@@ -131,7 +131,7 @@ let scheduledMessage = new cron.CronJob('32 14 * * *', () => {
                 if (data.meta.result_count > 0) {
                     for (let [key, client] of subscribedUsers) {
                         if (client.isSubscribedTo('vaccines')) {
-                            client.sendDirectMessage(data.data[0].text);
+                            client.sendDirectMessage(`Vaccines: ${data.data[0].text}`);
                         }
                     }
                 }
@@ -140,18 +140,6 @@ let scheduledMessage = new cron.CronJob('32 14 * * *', () => {
             }
         });
     });
-
-    // for (let [key, client] of subscribedUsers) {
-    //     console.log(key + " = " + client);
-    //     client.sendDirectMessage(`Here are your subscriptions:\n ${client.printSubscriptions()}`);
-    //     for (let category of categories) {
-    //         if (client.isSubscribedTo(category)) {
-    //             client.sendDirectMessage(`You are subscribed to ${category}. This is your regular alert.`)
-    //         } else {
-    //             client.sendDirectMessage(`Not subscribed to ${category}`);
-    //         }
-    //     }
-    // }
 });
           
 // When you want to start it, use:

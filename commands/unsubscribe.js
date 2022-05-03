@@ -21,6 +21,7 @@ module.exports = {
         for (arg of args) {
             if (arg === '--categories') {
                 message.channel.send("Categories: " + categories.toString());
+                message.channel.send("Please type '!unsubscribe [category]' to unsubscribe from alerts. Ex: '!unsubscribe masks'");
             } else if (!subscriptions.has(message.author.id)) {
                 message.channel.send(`You are not currently subscribed to alerts.`);
                 break;

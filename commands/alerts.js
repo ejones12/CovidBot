@@ -47,7 +47,7 @@ module.exports = {
                 break;
             } else if (arg === '--categories') { //lists all existing categories
                 message.channel.send("Categories: " + categories.toString());
-                message.channel.send("Please type '!alerts [category]' to subscribe to alerts. Ex: '!alerts masks'")
+                message.channel.send("Please type '!alerts [category]' to subscribe to alerts. Ex: '!alerts masks'");
             } else if (!categories.includes(arg)) { //determins if arguement is included in the category
                 message.channel.send(`"${arg}" is not a category.`);
             } else if (subscriptions.has(message.author.id)) { // need to check if the user is already subscribed
