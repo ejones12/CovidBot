@@ -4,22 +4,22 @@ import json
 import sys
 import os 
 
+"""
+    This python script uses the Twitter API to request data from twitter using specified 
+    parameters to narrow down the search 
+"""
 
-
-# To set your environment variables in your terminal run the following line:
-# export 'BEARER_TOKEN'='AAAAAAAAAAAAAAAAAAAAAPGUbQEAAAAAg%2B9USykp9ipGbV7rq%2FXaiEVo3MQ%3DIUES5pbBYe83F0tctvrMisyZ2w9nX1WSZeDKwOSqXOP5PrLJ0J'
-
+# This line sets your environment variables in your terminal by running the following line:
 os.environ['BEARER_TOKEN'] = 'AAAAAAAAAAAAAAAAAAAAAPGUbQEAAAAAg{}2B9USykp9ipGbV7rq{}2FXaiEVo3MQ{}3DIUES5pbBYe83F0tctvrMisyZ2w9nX1WSZeDKwOSqXOP5PrLJ0J'.format('%', '%', '%')
-
 bearer_token = os.environ.get("BEARER_TOKEN")
-
 
 # Optional params: start_time,end_time,since_id,until_id,max_results,next_token,
 # expansions,tweet.fields,media.fields,poll.fields,place.fields,user.fields
 #query_params = {'query': '("covid" from:cdcgov -is:retweet)'} #,'tweet.fields': 'author_id'}
 
-"""Creates related keywords for each keyword
-general, masks, travel, vaccines
+"""
+    Creates related keywords for each keyword
+    general, masks, travel, vaccines
 """
 def get_related(keyword):
     related = ""
@@ -38,16 +38,18 @@ def get_related(keyword):
     return related
 
 
-
-def bearer_oauth(r):
-    """
+"""
     Method required by bearer token authentication.
-    """
+"""
+def bearer_oauth(r):
 
     r.headers["Authorization"] = f"Bearer {bearer_token}"
     r.headers["User-Agent"] = "v2RecentSearchPython"
     return r
 
+"""
+    This method establishes the connection to the twitter endpoint and performs query
+"""
 def connect_to_endpoint(keyword):
     search_url = "https://api.twitter.com/2/tweets/search/recent"
     param = '({} from:cdcgov -is:retweet -is:reply)'.format(keyword)
@@ -60,7 +62,9 @@ def connect_to_endpoint(keyword):
         raise Exception(response.status_code, response.text)
     return response.json()
 
-
+"""
+    This method generates a json file foe a specified category and writes data to it
+"""
 def search_twitter(keyword, related):
     json_response = connect_to_endpoint(related)
 
@@ -80,9 +84,18 @@ def search_twitter(keyword, related):
         with open('general_data.json', 'w') as outfile:
             outfile.write(json.dumps(json_response, indent=4, sort_keys=True))
 
+"""
+    Main method that runs the twitter scraper script
+"""
 def main():
     keyword = sys.argv[1]
-    search_twitter(keyword, get_related(keyword))
+    if keyword == None:
+        search_twitter("travel", get_related(keyword))
+        search_twitter("masks", get_related(keyword))
+        search_twitter("vaccines", get_related(keyword))
+        search_twitter("general", get_related(keyword))
+    else:
+        search_twitter(keyword, get_related(keyword))
 
 if __name__ == "__main__":
     main()
