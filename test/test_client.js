@@ -20,4 +20,29 @@ it('Adds scheduled alert to client list, should return number of subscriptions',
         status = client.isSubscribedTo("vaccines")
         assert.equal(status, false);
     });
+
+    it('Return subscription time,', function () {
+        var status = client.isSubscribedTo("masks");
+        assert.equal(status,true);
+        var time = client.getSubscriptionTime("masks")
+        assert.equal(time,"8:00AM");
+    });
+
+    it('Print client subscription', function () {
+        var sub = client.printSubscriptions()
+        assert.equal(sub, "masks: 8:00AM\n");
+    });
+
+    it('Removes subscription from client,', function () {
+        var status = client.isSubscribedTo("masks");
+        assert.equal(status,true);
+        client.removeSubscription("masks")
+        status = client.isSubscribedTo("masks")
+        assert.equal(status, false);
+    });
+
+
+    
+
+
 });
