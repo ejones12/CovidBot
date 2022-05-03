@@ -89,7 +89,13 @@ def search_twitter(keyword, related):
 """
 def main():
     keyword = sys.argv[1]
-    search_twitter(keyword, get_related(keyword))
+    if keyword == None:
+        search_twitter("travel", get_related(keyword))
+        search_twitter("masks", get_related(keyword))
+        search_twitter("vaccines", get_related(keyword))
+        search_twitter("general", get_related(keyword))
+    else:
+        search_twitter(keyword, get_related(keyword))
 
 if __name__ == "__main__":
     main()
