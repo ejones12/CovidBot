@@ -1,11 +1,8 @@
 const Client = require('../client.js');
-/*
-
-Functionality for alerts command.
-Uses message sent by user to determine how to subscribe, unsubscribe and notify users. 
-When a new user is found, they are added to a list of existing clients
-
-*/
+/**
+ * Functionality for alerts command.Uses message sent by user to determine how to subscribe, unsubscribe and notify users. 
+ * When a new user is found, they are added to a list of existing clients
+ */
 module.exports = {
     name: 'alerts',
     description: "Allows the user to subsribe to alerts.",

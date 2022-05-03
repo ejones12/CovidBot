@@ -1,9 +1,9 @@
-/*
-
-Client class - Object representation of each subscribed user. Holds a users discord account information
-and a Map of their subscriptions for alerts. Able to send direct message to a discourd client based on given message.
-
-*/
+/**
+ * 
+ * Client class - Object representation of each subscribed user. Holds a users discord account information
+ * and a Map of their subscriptions for alerts. Able to send direct message to a discourd client based on given message.
+ * 
+ */
 class Client {
     
     subscriptions;
