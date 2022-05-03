@@ -52,12 +52,12 @@ client.on('messageCreate', message => {
     }
 });
 
-let scheduledMessage = new cron.CronJob('15 09 * * *', () => {
+let scheduledMessage = new cron.CronJob('20 14 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
     const guild = client.guilds.cache.get('943632194474242109');
     const channel = guild.channels.cache.get('947999201793568798');
-    channel.send('Automated update every day at 6:00pm');
+    console.log('Running cron job for alerts');
 
     const { spawn } = require('child_process');
     const scrapingProg = spawn('python', ['./twitterScraper.py']);
@@ -71,11 +71,11 @@ let scheduledMessage = new cron.CronJob('15 09 * * *', () => {
             }
             try {
                 const data = JSON.parse(jsonString);
-                for (let [key, client] of subscribedUsers) {
-                    if (client.isSubscribedTo('masks')) {
-                        client.sendDirectMessage(data.data[0].text);
-                    } else {
-                        client.sendDirectMessage(`Not subscribed to masks.`);
+                if (data.meta.result_count > 0) {
+                    for (let [key, client] of subscribedUsers) {
+                        if (client.isSubscribedTo('masks')) {
+                            client.sendDirectMessage(data.data[0].text);
+                        }
                     }
                 }
             } catch(err) {
@@ -89,11 +89,11 @@ let scheduledMessage = new cron.CronJob('15 09 * * *', () => {
             }
             try {
                 const data = JSON.parse(jsonString);
-                for (let [key, client] of subscribedUsers) {
-                    if (client.isSubscribedTo('travel')) {
-                        client.sendDirectMessage(data.data[0].text);
-                    } else {
-                        client.sendDirectMessage(`Not subscribed to travel.`);
+                if (data.meta.result_count > 0) {
+                    for (let [key, client] of subscribedUsers) {
+                        if (client.isSubscribedTo('travel')) {
+                            client.sendDirectMessage(data.data[0].text);
+                        }
                     }
                 }
             } catch(err) {
@@ -107,11 +107,11 @@ let scheduledMessage = new cron.CronJob('15 09 * * *', () => {
             }
             try {
                 const data = JSON.parse(jsonString);
-                for (let [key, client] of subscribedUsers) {
-                    if (client.isSubscribedTo('vaccines')) {
-                        client.sendDirectMessage(data.data[0].text);
-                    } else {
-                        client.sendDirectMessage(`Not subscribed to vaccines.`);
+                if (data.meta.result_count > 0) {
+                    for (let [key, client] of subscribedUsers) {
+                        if (client.isSubscribedTo('vaccines')) {
+                            client.sendDirectMessage(data.data[0].text);
+                        }
                     }
                 }
             } catch(err) {
