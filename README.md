@@ -26,6 +26,11 @@ How to Run Program:
 How to Run Tests: 
 
 Use Case Example #1: 
+    Use Case: Sign up for scheduled alerts
+    How to run it: 
+    - Assume the bot is on the server and the bot is running. 
+    - Flow 1: Type '!alerts masks' to sign up for daily scheduled alerts about masks
+        Expected Output: Bot reponds with '
 
 Use Case Example #2: 
 
