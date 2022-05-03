@@ -52,7 +52,7 @@ client.on('messageCreate', message => {
     }
 });
 
-let scheduledMessage = new cron.CronJob('45 13 * * *', () => {
+let scheduledMessage = new cron.CronJob('15 09 * * *', () => {
     // This runs every day at 10:30:00, you can do anything you want
     // Specifing your guild (server) and your channel
     const guild = client.guilds.cache.get('943632194474242109');
@@ -60,10 +60,10 @@ let scheduledMessage = new cron.CronJob('45 13 * * *', () => {
     channel.send('Automated update every day at 6:00pm');
 
     const { spawn } = require('child_process');
-    const scrapingProg = spawn('python', ['./twitterScraper.py', 'general']);
+    const scrapingProg = spawn('python', ['./twitterScraper.py']);
 
-    scrapingProg.stdout.on('data', function(data) {
-        console.log(data.toString());
+    scrapingProg.on('exit', function(code) {
+        console.log(`child process exited with code ${code}`);
         fs.readFile('./masks_data.json', 'utf8', (err, jsonString) => {
             if (err) {
                 console.log("Error reading file from disk:", err);
