@@ -4,7 +4,7 @@
   "description": "Our CS5704 Project to make a Discord Bot to communicate information about the Covid-19 pandemic in a uniform manner to SE teams.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/esdirkse/TroubleshooterBot#readme",
   "dependencies": {
+    "chai": "^4.3.6",
     "cron": "^1.8.2",
     "discord.js": "^13.6.0",
-    "discord.js.test": "^1.1.5"
+    "discord.js.test": "^1.1.5",
+    "mocha": "^10.0.0"
   },
   "devDependencies": {
     "@types/jest": "^27.4.1",
