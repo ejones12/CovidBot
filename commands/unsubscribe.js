@@ -1,5 +1,12 @@
 const Client = require('../client.js');
 
+/**
+ * 
+ * Functionality for the unsubscribe function. Allows user to unsubscribe from notifications for a specific category 
+ * or all categories.
+ * 
+ */
+
 module.exports = {
     name: 'unsubscribe',
     description: "Allows the user to unsubscribe from alerts.",

@@ -1,3 +1,8 @@
+/**
+ * 
+ * Functionality for the help command. Lists information about how to use bot commands to user when called.
+ * 
+ */
 module.exports = {
     name: 'help',
     description: "Gives the user a list of commands.",

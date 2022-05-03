@@ -1,3 +1,7 @@
+/**
+ * Main project runner - 
+ */
+
 const Discord = require('discord.js');
 const { setServers } = require('dns');
 const fs = require('fs');
@@ -13,7 +17,7 @@ for (const file of commandFiles) {
 }
 
 // Bot would probably need to keep a list of subscribed users for each category.
-// Using sets to ensure we don't have duplicates.
+//Maps client objects to a discorb id
 const subscribedUsers = new Map(); /* { //restructure to a single map
     'travel': new Set(),
     'vaccines': new Set(),
@@ -64,7 +68,7 @@ let scheduledMessage = new cron.CronJob('20 14 * * *', () => {
 
     scrapingProg.on('exit', function(code) {
         console.log(`child process exited with code ${code}`);
-        fs.readFile('./masks_data.json', 'utf8', (err, jsonString) => {
+        fs.readFile('./json_data/masks_data.json', 'utf8', (err, jsonString) => {
             if (err) {
                 console.log("Error reading file from disk:", err);
                 return;
@@ -82,7 +86,7 @@ let scheduledMessage = new cron.CronJob('20 14 * * *', () => {
                 console.log('Error parsing JSON string:', err);
             }
         });
-        fs.readFile('./travel_data.json', 'utf8', (err, jsonString) => {
+        fs.readFile('./json_data/travel_data.json', 'utf8', (err, jsonString) => {
             if (err) {
                 console.log("Error reading file from disk:", err);
                 return;
@@ -100,7 +104,7 @@ let scheduledMessage = new cron.CronJob('20 14 * * *', () => {
                 console.log('Error parsing JSON string:', err);
             }
         });
-        fs.readFile('./vaccines_data.json', 'utf8', (err, jsonString) => {
+        fs.readFile('./json_data/vaccines_data.json', 'utf8', (err, jsonString) => {
             if (err) {
                 console.log("Error reading file from disk:", err);
                 return;

@@ -1,5 +1,12 @@
 const fs = require('fs')
 
+/**
+ * 
+ * Functionality for information command. Allows user to request immediate information given a specific category
+ * or general categories. Scrapes the CDC Twitter account and returns information to the user.
+ * 
+ */
+
 module.exports = {
     name: 'information',
     description: "Allows the user to request immediate updates.",
