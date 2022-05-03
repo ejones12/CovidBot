@@ -60,36 +60,77 @@ let scheduledMessage = new cron.CronJob('45 13 * * *', () => {
     channel.send('Automated update every day at 6:00pm');
 
     const { spawn } = require('child_process');
-    const generalScrape = spawn('python', ['./twitterScraper.py', 'general']);
-    const travelScrape = spawn('python', ['./twitterScraper.py', 'travel']);
-    const masksScrape = spawn('python', ['./twitterScraper.py', 'masks']);
-    const vaccinesScrape = spawn('python', ['./twitterScraper.py', 'vaccines']);
+    const scrapingProg = spawn('python', ['./twitterScraper.py', 'general']);
 
-    generalScrape.stdout.on('data', function(data) {
-        fs.readFile('./general_data.json', 'utf8', (err, jsonString) => {
+    scrapingProg.stdout.on('data', function(data) {
+        console.log(data.toString());
+        fs.readFile('./masks_data.json', 'utf8', (err, jsonString) => {
             if (err) {
                 console.log("Error reading file from disk:", err);
                 return;
             }
             try {
                 const data = JSON.parse(jsonString);
+                for (let [key, client] of subscribedUsers) {
+                    if (client.isSubscribedTo('masks')) {
+                        client.sendDirectMessage(data.data[0].text);
+                    } else {
+                        client.sendDirectMessage(`Not subscribed to masks.`);
+                    }
+                }
+            } catch(err) {
+                console.log('Error parsing JSON string:', err);
+            }
+        });
+        fs.readFile('./travel_data.json', 'utf8', (err, jsonString) => {
+            if (err) {
+                console.log("Error reading file from disk:", err);
+                return;
+            }
+            try {
+                const data = JSON.parse(jsonString);
+                for (let [key, client] of subscribedUsers) {
+                    if (client.isSubscribedTo('travel')) {
+                        client.sendDirectMessage(data.data[0].text);
+                    } else {
+                        client.sendDirectMessage(`Not subscribed to travel.`);
+                    }
+                }
+            } catch(err) {
+                console.log('Error parsing JSON string:', err);
+            }
+        });
+        fs.readFile('./vaccines_data.json', 'utf8', (err, jsonString) => {
+            if (err) {
+                console.log("Error reading file from disk:", err);
+                return;
+            }
+            try {
+                const data = JSON.parse(jsonString);
+                for (let [key, client] of subscribedUsers) {
+                    if (client.isSubscribedTo('vaccines')) {
+                        client.sendDirectMessage(data.data[0].text);
+                    } else {
+                        client.sendDirectMessage(`Not subscribed to vaccines.`);
+                    }
+                }
             } catch(err) {
                 console.log('Error parsing JSON string:', err);
             }
         });
     });
 
-    for (let [key, client] of subscribedUsers) {
-        console.log(key + " = " + client);
-        client.sendDirectMessage(`Here are your subscriptions:\n ${client.printSubscriptions()}`);
-        for (let category of categories) {
-            if (client.isSubscribedTo(category)) {
-                client.sendDirectMessage(`You are subscribed to ${category}. This is your regular alert.`)
-            } else {
-                client.sendDirectMessage(`Not subscribed to ${category}`);
-            }
-        }
-    }
+    // for (let [key, client] of subscribedUsers) {
+    //     console.log(key + " = " + client);
+    //     client.sendDirectMessage(`Here are your subscriptions:\n ${client.printSubscriptions()}`);
+    //     for (let category of categories) {
+    //         if (client.isSubscribedTo(category)) {
+    //             client.sendDirectMessage(`You are subscribed to ${category}. This is your regular alert.`)
+    //         } else {
+    //             client.sendDirectMessage(`Not subscribed to ${category}`);
+    //         }
+    //     }
+    // }
 });
           
 // When you want to start it, use:

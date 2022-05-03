@@ -88,13 +88,13 @@ def search_twitter(keyword, related):
     Main method that runs the twitter scraper script
 """
 def main():
-    keyword = sys.argv[1]
-    if keyword == None:
-        search_twitter("travel", get_related(keyword))
-        search_twitter("masks", get_related(keyword))
-        search_twitter("vaccines", get_related(keyword))
-        search_twitter("general", get_related(keyword))
+    if len(sys.argv) < 2:
+        search_twitter("travel", get_related("travel"))
+        search_twitter("masks", get_related("masks"))
+        search_twitter("vaccines", get_related("vaccines"))
+        search_twitter("general", get_related("general"))
     else:
+        keyword = sys.argv[1]
         search_twitter(keyword, get_related(keyword))
 
 if __name__ == "__main__":
