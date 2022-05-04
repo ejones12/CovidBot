@@ -19,8 +19,8 @@ module.exports = {
             console.error(`stderr: ${data}`);
         });
 
-        scrapingProg.stdout.on('data', function(data) {
-            console.log(data.toString());
+        scrapingProg.on('exit', function(code) {
+            console.log(`child process exited with code ${code}`);
             //read from json?
             //need check for args to see if invalid
             //pass in as args to twitter script
@@ -31,9 +31,10 @@ module.exports = {
                 }
                 try {
                     const data = JSON.parse(jsonString)
-                    console.log(data.data[0].text);
-                    //console.log("Customer address is:", customer.address) // => "Customer address is: Infinity Loop Drive"
-                    message.channel.send(data.data[0].text);
+                    if (data.meta.result_count > 0) {
+                        console.log(data.data[0].text);
+                        message.channel.send(data.data[0].text);
+                    }
                 } catch(err) {
                     console.log('Error parsing JSON string:', err)
                 }
