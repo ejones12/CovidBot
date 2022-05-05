@@ -7,8 +7,6 @@ var assert = require('assert');
  * 
 */
 
-
-
 describe('Client Functionality Unit Tests', function () {
     let discordObj = "discordObj";
     let client = new Client(discordObj);

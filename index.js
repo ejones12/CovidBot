@@ -1,5 +1,6 @@
 /**
- * Main project runner - 
+ * Main project runner - Creates a Discord Bot client on command and sets up necessary
+ * data structres and commands for it to communicate with clients
  */
 
 const Discord = require('discord.js');
@@ -10,6 +11,7 @@ const client = new Discord.Client({intents: ["GUILDS", "GUILD_MESSAGES"]});
 const prefix = '!'
 client.commands = new Discord.Collection();
 
+//
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
@@ -18,19 +20,16 @@ for (const file of commandFiles) {
 
 // Bot would probably need to keep a list of subscribed users for each category.
 //Maps client objects to a discorb id
-const subscribedUsers = new Map(); /* { //restructure to a single map
-    'travel': new Set(),
-    'vaccines': new Set(),
-    'masks': new Set()
-}; */
+const subscribedUsers = new Map(); 
 
 const categories = ['general', 'travel', 'vaccines', 'masks'];//
 
+//Displays message in terminal once ready signal is sent from bot
 client.once('ready', () => {
     console.log('CovidBot is ready!\n');
 });
 
-// code from CodeLyon
+// Funconality to handle incoming messages from client
 client.on('messageCreate', message => {
     if(!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -55,8 +54,10 @@ client.on('messageCreate', message => {
     }
 });
 
+// Creates CronJob that runs at 10:00AM everyday, scraps the CDC Twitter and sends notifications to
+//currently subscribed clients based on their assigned topics
 let scheduledMessage = new cron.CronJob('00 10 * * *', () => {
-    // This runs every day at 10:30:00, you can do anything you want
+    
     // Specifing your guild (server) and your channel
     const guild = client.guilds.cache.get('943632194474242109');
     const channel = guild.channels.cache.get('947999201793568798');
@@ -142,9 +143,9 @@ let scheduledMessage = new cron.CronJob('00 10 * * *', () => {
     });
 });
           
-// When you want to start it, use:
+//  Starts CronJob
 scheduledMessage.start()
     
 
 // need to keep this token hidden
-client.login('OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'); //process.env.LOGIN_TOKEN//OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'
+client.login(process.env.LOGIN_TOKEN); //process.env.LOGIN_TOKEN//OTQ4NDE4OTU3NDgyNzk1MDU4.Yh7h_A.kvW4TzMuLV3JxojSeoDRsVw9CRA'

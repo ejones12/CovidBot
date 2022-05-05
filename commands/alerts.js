@@ -8,10 +8,7 @@ module.exports = {
     description: "Allows the user to subsribe to alerts.",
     execute(message, args, subscriptions, categories) {
 
-        // It seems like we wouldn't want every user's alerts to be sent to one
-        // channel because users would have to search to find the alerts
-        // they're interested in (defeats the purpose of personalized alerts).
-        // It may be better to send alerts as direct messages to the users.
+        
         console.log(message.author);
         
         //Did not provide category to subscribe to

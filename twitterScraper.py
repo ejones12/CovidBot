@@ -90,6 +90,7 @@ def search_twitter(keyword, related):
     Main method that runs the twitter scraper script
 """
 def main():
+    path = os.getcwd()
     if len(sys.argv) < 2:
         search_twitter("travel", get_related("travel"))
         search_twitter("masks", get_related("masks"))

@@ -29,7 +29,10 @@ All commands to the bot begin with an '!'. The following are the commands that t
 1. Heroku Account
 2. Heroku CLI
 
-## How to Set Up Bot 
+## How to Set Up GitHub Repo
+1.Clone
+2. Npm install to install dependences
+3. pip install -r requirements.txt
 
 #### Set Up Heroku Account ####
 1. You will have received an intivation in your email to collaborate on a Heroku app called 'troubleshootersbot'. Go to this email and select "Accept Invitation".
