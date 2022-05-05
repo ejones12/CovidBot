@@ -26,29 +26,12 @@ All commands to the bot begin with an '!'. The following are the commands that t
 !information: request immediate information
 
 ## Requirements
-1. Heroku Account
-2. Heroku CLI
+1. 
 
 ## How to Set Up GitHub Repo
-1.Clone
-2. Npm install to install dependences
-3. pip install -r requirements.txt
-
-#### Set Up Heroku Account ####
-1. You will have received an intivation in your email to collaborate on a Heroku app called 'troubleshootersbot'. Go to this email and select "Accept Invitation".
-2. You will then be prompted to create an account. Once you've finished, click set up and login. Then click "click here to proceed".
-3. Accept the Terms of Service, then navigate to the troubleshooters bot dashboard.
-
-#### Install Heroku CLI ####
-
-#### Clone Bot Repository ####
-1. Navigate to the location within your terminal that you would like to clone the repo
-2. On the troubleshooters bot Heroku dahsboard, select Deploy. Scroll down to the "Deployment method" option.
-3. Select "Heroku Git". Here you will be prompted to install the Heroku CLI. Selct "Heroku CLI" and follow the instructions for installment on your machine (https://devcenter.heroku.com/articles/heroku-cli#install-the-heroku-cli). 
-4. Once installed, navigate to your terminal and type "heroku login". You will receive a prompt and be redirected back to the Heroku site to login.
-5. Once logged in, navigate back to your terminal and type "heroku git:clone -a troubleshootersbot".
-6. Enter "cd troublershootersbot".
-7. You will now have access to the bot's github repository.
+1. Navigate to our githib repo and clone in your preferred terminal (git clone https://github.com/esdirkse/TroubleshooterBot.git)
+2. In the root directory (TroubleshooterBot), type "npm install" into terminal to install required dependences
+3. Enter "pip install -r requirements.txt" into terminal to install all python requirements
 
 ## How to Run Program:
 
