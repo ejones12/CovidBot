@@ -1,7 +1,16 @@
+const Client = require('../client.js');
+
+/**
+ * 
+ * Functionality for the unsubscribe function. Allows user to unsubscribe from notifications for a specific category 
+ * or all categories.
+ * 
+ */
+
 module.exports = {
     name: 'unsubscribe',
     description: "Allows the user to unsubscribe from alerts.",
-    execute(message, args, subscriptions) {
+    execute(message, args, subscriptions, categories) {
         console.log(message.author);
 
         if (args.length === 0) {
@@ -10,22 +19,36 @@ module.exports = {
         }
 
         for (arg of args) {
-            if (arg === 'all') {
-                message.channel.send("You have unsubscribed from all alerts.")
-                subscriptions['travel'].delete(message.author);
-                subscriptions['vaccines'].delete(message.author);
-                subscriptions['masks'].delete(message.author);
+            if (arg === '--categories') {
+                message.channel.send("Categories: " + categories.toString());
+                message.channel.send("Please type '!unsubscribe [category]' to unsubscribe from alerts. Ex: '!unsubscribe masks'");
+            } else if (!subscriptions.has(message.author.id)) {
+                message.channel.send(`You are not currently subscribed to alerts.`);
                 break;
-            } else if (arg === '-categories') {
-                message.channel.send("travel\nvaccines\nmasks");
-            } else if (!Object.keys(subscriptions).includes(arg)) {
+            } else if (arg === '--all') {
+                var currClient;
+                currClient = subscriptions.get(message.author.id);
+                for (let category of categories){
+                    if (currClient.isSubscribedTo(category)) {
+                        currClient.removeSubscription(category);
+                    }
+                }
+                subscriptions.delete(message.author.id);
+                message.channel.send("You have unsubscribed from all alerts.");
+                break;
+            } else if (!categories.includes(arg)) {
                 message.channel.send(`"${arg}" is not a category.`);
-            } else if (!subscriptions[arg].has(message.author)) {
-                message.channel.send(`You are not currently subscribed to ${arg} alerts.`);
             } else {
-                message.channel.send(`You have unsubscribed from ${arg} alerts.`);
-                // remove user from set
-                subscriptions[arg].delete(message.author);
+                var currClient = subscriptions.get(message.author.id);
+                if (!currClient.isSubscribedTo(arg)) {
+                    message.channel.send(`You are not currently subscribed to ${arg} alerts.`);
+                } else {
+                    currClient.removeSubscription(arg);
+                    if (currClient.getNumSubscriptions() === 0) {
+                        subscriptions.delete(message.author.id);
+                    }
+                    message.channel.send(`You have unsubscribed from ${arg} alerts.`);
+                }
             }
         }
     }
