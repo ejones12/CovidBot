@@ -1,4 +1,4 @@
-# TroubleshooterBot
+# Troubleshooters - CovidBot
 
 Team: Troubleshooters
 
