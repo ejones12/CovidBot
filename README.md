@@ -29,6 +29,8 @@ All commands to the bot begin with an '!'. The following are the commands that t
 1. Navigate to our githib repo and clone in your preferred terminal (git clone https://github.com/esdirkse/TroubleshooterBot.git)
 2. In the root directory (TroubleshooterBot), type "npm install" into terminal to install required dependences
 3. Enter "pip install -r requirements.txt" into terminal to install all python requirements
+4. If you receive this error while installing the requirements.txt: ERROR: Could not install packages due to an OSError: [WinError 2] The system cannot find the file specified: 'C:\Python310\Scripts\py.test.exe' -> 'C:\Python310\Scripts\py.test.exe.deleteme'
+5. Use this line to fix : "pip install -r requirements.txt --user"
 
 ## How to Run Program:
 
