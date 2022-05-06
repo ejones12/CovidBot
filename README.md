@@ -35,7 +35,7 @@ All commands to the bot begin with an '!'. The following are the commands that t
 
 ## How to Run Program:
 
-The bot will be already be deployed and be hosted 24/7 for the next week and a half. Once you navigate to our discordvserver, you can use any of our listed commands to use the bot. To list the commands, type !help into any channel.
+The bot will be already be deployed and be hosted 24/7 for the next week and a half. Once you navigate to our discord server, you can use any of our listed commands to use the bot. To list the commands, type !help into any channel.
 
 For alerts, notifications are sent at 10:00AM each day. You can subscribe and unsubscribe from notifications at any time.
 
@@ -62,8 +62,7 @@ Python Tests
 
 
 Additional Testing
-- We were not able to add additional unit testing for some of our additional classes due to the difficulty of working with
-the Discord API and mimicking the ability send messages back and forth between the client and the bot. This kind if testing is done in our acceptance testing/use cases, showing the functionality of our bot.
+- We were not able to add additional unit testing for some of our additional classes due to the difficulty of working with the Discord API and mimicking the ability to send messages back and forth between the client and the bot. This kind of testing is done in our acceptance testing/use cases, showing the functionality of our bot.
 
 
 ## Use Case #1: Sign Up for Scheduled Alerts
