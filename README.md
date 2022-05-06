@@ -35,7 +35,7 @@ All commands to the bot begin with an '!'. The following are the commands that t
 
 ## How to Run Program:
 
-The bot will be already be deployed and be hosted 24/7 for the next week and a half. Once you navigate to our discordvserver, you can use any of our listed commands to use the bot. To list the commands, type !help into any channel.
+The bot will be already be deployed and be hosted 24/7 for the next week and a half. Once you navigate to our Discord server, you can use any of our listed commands to use the bot. To list the commands, type !help into any channel.
 
 For alerts, notifications are sent at 10:00AM each day. You can subscribe and unsubscribe from notifications at any time.
 
