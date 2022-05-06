@@ -68,7 +68,7 @@ the Discord API and mimicking the ability send messages back and forth between t
 
 ## Use Case #1: Sign Up for Scheduled Alerts
 
-- Precondition: Assume the bot is on the server and the bot is running. 
+- Precondition: The bot is on the server and the bot is running. 
 - Flow 1: signing up for just mask updates
     -How to Run: Type '!alerts masks' to sign up for daily scheduled alerts about masks  
     -Expected Output: 
@@ -94,6 +94,17 @@ the Discord API and mimicking the ability send messages back and forth between t
     -Expected Output: 
         -There will be four lines of output. For general, masks, travel, and vaccines. Each output will be the text from either the Expected Output or Alternate Expected Output based on if the user is already subscribed. 
 
-## Use Case Example #2:
+## Use Case #2: 
+
+- Precondition: the bot is on the server and the bot is running. 
+- How to run: The user will type '!information category' where 'category' is either 'masks', 'vaccines', 'travel', 'general', or '--all'.
+- Expected Output: If '!information masks' is entered, the bot will message the user a reply containing a list of up to ten recent tweets from the CDC twitter relating to masking. The tweets will display as a thumbnail that contains the first part of the tweet with any image included in the tweet. The tweet will also be in the form of a hyperlink that the user can click that will take the user to the CDC twitter where they can see the tweet. If '!information vaccines' is entered, the same output is expected, but the tweets will relate to vaccines. If '!information travel' is entered, the same output is expected, but tweets returned by the bot will relate to travel updates. If '!information general', the same output is expected, but the tweets will relate to general updates about the pandemic. 
+- Alternate Expected Output: If there have been no new tweets by the CDC twitter since the last time !information was called, the same tweet will be returned again. 
+- Alternate Expected Output: If there have been no tweets at all by the CDC twitter in the last ten days, no tweets will be returned. 
 
 ## Use Case Example #3:
+
+- Precondition: The bot is on the server and the bot is running. 
+- How to run: The user will type '!unsubscribe category' where 'category' is either 'masks', 'vaccines', 'travel', 'general', or '--all'. 
+- Expected output: If '!unsubscribe masks' is entered and the user is subscribed to mask updates, the user will no longer receive regularly scheduled updates relating to masks. They will receive a message from the bot 'You have unsubscrubed from mask alerts.' If a different category is entered, the user will be unsubscribed from that category.  
+- Alternate work flow: If the user types '!unsubscribe category' and the user is not subscribed to the category, the user will simply be met with a message 'You are not currently subscribed to alerts'. They will still not receive the regularly scheduled daily updates. 
