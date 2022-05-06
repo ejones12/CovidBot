@@ -55,8 +55,8 @@ Python Tests
 
 
 Additional Testing
-- We were not able to add additional unit testing for some of our additional classes due to the difficulty of working with
-the Discord API and mimicking the ability send messages back and forth between the client and the bot. This kind if testing is done in our acceptance testing/use cases, showing the functionality of our bot.
+- We were not able to add additional unit testing for some of our files due to the difficulty of working with
+the Discord API and mimicking the ability send messages back and forth between the client and the bot. This kind of testing is done in our acceptance testing/use cases, showing the functionality of our bot.
 
 
 ## Use Case #1: Sign Up for Scheduled Alerts
