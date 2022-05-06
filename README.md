@@ -25,13 +25,13 @@ All commands to the bot begin with an '!'. The following are the commands that t
 --categories: get list of categories  
 !information: request immediate information
 
-## Requirements
-1. 
-
 ## How to Set Up GitHub Repo
 1. Navigate to our githib repo and clone in your preferred terminal (git clone https://github.com/esdirkse/TroubleshooterBot.git)
 2. In the root directory (TroubleshooterBot), type "npm install" into terminal to install required dependences
 3. Enter "pip install -r requirements.txt" into terminal to install all python requirements
+4. If you receive the following error when installing the requirements.txt 
+    - ERROR: Could not install packages due to an OSError: [WinError 2] The system cannot find the file specified: 'C:\Python310\Scripts\py.test.exe' -> 'C:\Python310\Scripts\py.test.exe.deleteme'
+    - Type line: "pip install -r requirements.txt --user"
 
 ## How to Run Program:
 
@@ -48,7 +48,7 @@ and a mapping of their subscription requests and times for subscriptions. In thi
 
 - To run tests:
     - Navigate to root directory (troubleshooterbot)
-    - Type command "npm test" into terminal
+    - Type command "npm test" into terminal in the root directory
     - Output will show results of Client class unit test
 
 Python Tests
@@ -57,7 +57,7 @@ Python Tests
 
 - To run tests:
     - Navigate to root directory (troubleshooterbot)
-    - Type command "python -m pytest ./twitterScraperTest.py" into the terminal 
+    - Type command "python -m pytest ./test/twitterScraperTest.py" into the terminal in the root directory
     - Output will show the number of unit tests passed
 
 
@@ -96,7 +96,7 @@ the Discord API and mimicking the ability send messages back and forth between t
 
 ## Use Case #2: 
 
-- Precondition: the bot is on the server and the bot is running. 
+- Precondition: The bot is on the server and the bot is running. 
 - How to run: The user will type '!information category' where 'category' is either 'masks', 'vaccines', 'travel', 'general', or '--all'.
 - Expected Output: If '!information masks' is entered, the bot will message the user a reply containing a list of up to ten recent tweets from the CDC twitter relating to masking. The tweets will display as a thumbnail that contains the first part of the tweet with any image included in the tweet. The tweet will also be in the form of a hyperlink that the user can click that will take the user to the CDC twitter where they can see the tweet. If '!information vaccines' is entered, the same output is expected, but the tweets will relate to vaccines. If '!information travel' is entered, the same output is expected, but tweets returned by the bot will relate to travel updates. If '!information general', the same output is expected, but the tweets will relate to general updates about the pandemic. 
 - Alternate Expected Output: If there have been no new tweets by the CDC twitter since the last time !information was called, the same tweet will be returned again. 
