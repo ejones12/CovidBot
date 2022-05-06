@@ -28,8 +28,8 @@ All commands to the bot begin with an '!'. The following are the commands that t
 ## Requirements
 1. 
 
-## How to Set Up GitHub Repo
-1. Navigate to our githib repo and clone in your preferred terminal (git clone https://github.com/esdirkse/TroubleshooterBot.git)
+## How to Set Up Git Repo
+1. Navigate to our GitHub repo and clone in your preferred terminal (git clone https://github.com/esdirkse/TroubleshooterBot.git)
 2. In the root directory (TroubleshooterBot), type "npm install" into terminal to install required dependences
 3. Enter "pip install -r requirements.txt" into terminal to install all python requirements
 
