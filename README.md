@@ -53,7 +53,7 @@ and a mapping of their subscription requests and times for subscriptions. In thi
 
 Python Tests
 
-- The twitter scraper script was unit tested using "Pytest" which is Python's framework for testing. In the twitterScraperTest.py file we created unit tests for each category of search and verified that the correct json file for each category was created. Additionally, we checked that the files were not empty given that it is not possible to determine the exact data inside since the tweets returned could be different every time a query is performed.
+- The twitter scraper script was unit tested using "Pytest" which is Python's framework for testing. In the twitterScraperTest.py file we created unit tests for each category of search and verified that the correct json file for each category was created. Additionally, we checked that the files were not empty given that it is not possible to determine the exact data inside them since the tweets returned could be different every time a query is performed.
 
 - To run tests:
     - Navigate to root directory (troubleshooterbot)
