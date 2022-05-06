@@ -63,28 +63,28 @@ the Discord API and mimicking the ability send messages back and forth between t
 
 - Precondition: Assume the bot is on the server and the bot is running. 
 - Flow 1: signing up for just mask updates
-    -How to Run: Type '!alerts masks' to sign up for daily scheduled alerts about masks  
-    -Expected Output: 
+    - How to Run: Type '!alerts masks' to sign up for daily scheduled alerts about masks  
+    - Expected Output: 
         -Bot reponds with 'You have subscribed to masks alerts. You will be notified at 10:00AM each day.'
         -At 10:00AM every day you will receive a message from the bot with information from the CDC's Twitter about mask updates. 
-    -Alternate Flow Expected Output: 
+    - Alternate Flow Expected Output: 
         -If you are already subscribed to masks alerts, the bot will respond with 'Sorry, you are already subscrubed to masks alerts. You will receive notifications at 10:00AM.' 
         -At 10:00AM every day you will receive a message from the bot with information from the CDC's Twitter about mask updates.
  - Flow 2: signing up for just travel updates
-    -How to Run: Type '!alerts travel' to sign up for daily scheduled alerts about travel  
-    -Expected Output/Alternate Expected Output: 
+    - How to Run: Type '!alerts travel' to sign up for daily scheduled alerts about travel  
+    - Expected Output/Alternate Expected Output: 
         -these are the same as Flow 1, but 'mask' is replaced with 'travel'
 - Flow 3: signing up for just vaccine updates
-    -How to Run: Type '!alerts vaccines' to sign up for daily scheduled alerts about masks  
-    -Expected Output: 
+    - How to Run: Type '!alerts vaccines' to sign up for daily scheduled alerts about vaccines  
+    - Expected Output: 
         -these are the same as Flow 1, but 'mask' is replaced with 'vaccine'
 - Flow 4: signing up for just general updates
-    -How to Run: Type '!alerts general' to sign up for daily scheduled alerts about masks  
-    -Expected Output: 
-        -these are the same as Flow 1, but 'mask' is replaced with 'vaccine'
+    - How to Run: Type '!alerts general' to sign up for daily scheduled alerts about general Covid-19 updates
+    - Expected Output: 
+        -these are the same as Flow 1, but 'mask' is replaced with 'general'
 - Flow 5: signing up for all alerts
-    -How to Run: Type '!alerts --all' to sign up for daily scheduled alerts about masks  
-    -Expected Output: 
+    - How to Run: Type '!alerts --all' to sign up for all daily scheduled alerts 
+    - Expected Output: 
         -There will be four lines of output. For general, masks, travel, and vaccines. Each output will be the text from either the Expected Output or Alternate Expected Output based on if the user is already subscribed. 
 
 ## Use Case Example #2:
